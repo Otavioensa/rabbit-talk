@@ -9,9 +9,6 @@ const workQueue = config.rabbit.workQueue;
 const assertQueueOptions = { durable: true };
 const consumeQueueOptions = { noAck: false };
 
-return amqp.connect(uri)
-  .then((connection) => connection.createChannel())
-  .then((channel) => assertAndConsumeQueue(channel));
 
 const assertAndConsumeQueue = (channel) => {
 
@@ -22,7 +19,7 @@ const assertAndConsumeQueue = (channel) => {
   };
 
   return channel.assertQueue(workQueue, assertQueueOptions)
-    .then(() => channel.consume(workQueue, ackMessage, consumeQueueOptions);
+    .then(() => channel.consume(workQueue, ackMessage, consumeQueueOptions));
 };
 
 
@@ -32,3 +29,7 @@ const doYourHeavyTask = (msg) => {
   console.log(msg.content.toString());
   return promise.resolve('done');
 };
+
+return amqp.connect(uri)
+  .then((connection) => connection.createChannel())
+  .then((channel) => assertAndConsumeQueue(channel));
