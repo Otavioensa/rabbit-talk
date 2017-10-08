@@ -26,7 +26,7 @@ const assertAndConsumeQueue = (channel) => {
 };
 
 
-// it does all your heavy tasks
+// faz todo o trabalho pesado que a aplicação não podia lidar.
 const doYourHeavyTask = (msg) => {
 
   console.log(msg.content.toString());
