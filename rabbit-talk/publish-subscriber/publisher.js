@@ -22,8 +22,8 @@ const assertAndSendToExchange = (channel) => {
 
   return channel.assertExchange(xptoExchange, 'fanout', assertExchangeOptions)
     .then(() => channel.publish(xptoExchange, '', bufferedData))
-    .then(() => channel.close());
+    .then(() => channel.close())
+    .then(() => process.exit(0));
 };
 
-return publishData()
-  .then(() => process.exit(0));
+return publishData();
