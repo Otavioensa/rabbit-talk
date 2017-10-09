@@ -6,3 +6,7 @@ const rabbit = {
   exchange: process.env.applicationExchange || 'ApplicationExchange',
   consumerExchange: process.env.consumerExchange || 'ConsumerExchange'
 };
+
+module.exports = {
+  rabbit: rabbit
+};
