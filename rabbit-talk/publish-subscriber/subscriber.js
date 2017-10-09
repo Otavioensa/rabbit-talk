@@ -20,11 +20,7 @@ const assertAndConsumeExchange = (channel) => {
     .then((queue) => channel.consume(queue, ackMessage, consumeExchangeOptions));
 };
 
-const processMessage = (msg) => {
-
-  console.log(`Message received: ${msg.content.toString()}`);
-  return promise.resolve();
-};
+const processMessage = (msg) => promise.resolve(console.log(`Message received: ${msg.content.toString()}`));
 
 return amqp.connect(uri)
   .then((connection) => connection.createChannel())
