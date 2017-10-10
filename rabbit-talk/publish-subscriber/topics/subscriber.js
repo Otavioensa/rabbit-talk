@@ -5,7 +5,7 @@ const config = require('../../config');
 const promise = require('bluebird');
 
 const uri = config.rabbit.uri;
-const routingExchange = config.rabbit.routingExchange;
+const topicExchange = config.rabbit.topicExchange;
 const assertExchangeOptions = { durable: false };
 const assertQueueOptions = { exclusive: true };
 const consumeExchangeOptions = { noAck: false };
@@ -15,9 +15,9 @@ const assertAndConsumeExchange = (channel) => {
 
   const ackMessage = (msg) => processMessage(msg).then(() => channel.ack(msg));
 
-  return channel.assertExchange(routingExchange, 'topic', assertExchangeOptions)
+  return channel.assertExchange(topicExchange, 'topic', assertExchangeOptions)
     .then(() => channel.assertQueue('', assertQueueOptions))
-    .then((queueOk) => channel.bindQueue(queueOk.queue, routingExchange, subject).then(() => queueOk.queue))
+    .then((queueOk) => channel.bindQueue(queueOk.queue, topicExchange, subject).then(() => queueOk.queue))
     .then((queue) => channel.consume(queue, ackMessage, consumeExchangeOptions));
 };
 

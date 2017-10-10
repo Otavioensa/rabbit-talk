@@ -5,7 +5,7 @@ const config = require('../../config');
 const promise = require('bluebird');
 
 const uri = config.rabbit.uri;
-const routingExchange = config.rabbit.routingExchange;
+const topicExchange = config.rabbit.topicExchange;
 const assertExchangeOptions = { durable: false };
 const data = process.argv[2] ? process.argv[2] : 'any data might be here :)';
 const subject = process.argv[3] ? process.argv[3] : 'fixedSubject';
@@ -21,8 +21,8 @@ const assertAndSendToExchange = (channel) => {
 
   const bufferedData = new Buffer(data);
 
-  return channel.assertExchange(routingExchange, 'topic', assertExchangeOptions)
-    .then(() => channel.publish(routingExchange, subject, bufferedData))
+  return channel.assertExchange(topicExchange, 'topic', assertExchangeOptions)
+    .then(() => channel.publish(topicExchange, subject, bufferedData))
     .then(() => channel.close())
     .then(() => process.exit(0));
 };
