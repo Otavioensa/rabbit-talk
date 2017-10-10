@@ -1,7 +1,7 @@
 'use strict';
 
 const amqp = require('amqplib');
-const config = require('../config');
+const config = require('../../config');
 const promise = require('bluebird');
 
 const uri = config.rabbit.uri;
