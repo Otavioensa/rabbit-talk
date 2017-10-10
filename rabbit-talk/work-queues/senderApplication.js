@@ -10,11 +10,7 @@ const assertQueueOptions = { durable: true };
 const sendToQueueOptions = { persistent: true };
 const data = process.argv[2] ? process.argv[2] : 'any data goes here';
 
-const processLightStuff = () => {
-
-  console.log('Process light stuff');
-  return promise.resolve();
-};
+const processLightStuff = () => promise.resolve(console.log('Process light stuff'));
 
 const sendDataToQueue = () => {
 
